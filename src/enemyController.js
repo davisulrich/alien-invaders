@@ -150,4 +150,8 @@ export default class EnemyController {
       this.moveDownTimer = this.moveDownTimerDefault;
     }
   }
+
+  collideWith(sprite) {
+    return this.enemyRows.flat().some((enemy) => enemy.collideWith(sprite));
+  }
 }

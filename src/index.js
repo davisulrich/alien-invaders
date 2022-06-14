@@ -14,7 +14,7 @@ const background = new Image();
 background.src = "src/images/pixel_stars.jpg";
 
 const gameStartAudio = new Audio("src/audio/computerNoise_000.ogg");
-gameStartAudio.volume = 0.05;
+gameStartAudio.volume = 0.02;
 gameStartAudio.play();
 
 // bullet controllers
@@ -53,12 +53,21 @@ function checkGameOver() {
   if (isGameOver) {
     return;
   }
-  if (enemyBulletController.collideWith(player)) {
+  if (
+    enemyBulletController.collideWith(player) ||
+    enemyController.collideWith(player)
+  ) {
     isGameOver = true;
     let playerDeathSound = new Audio("/src/audio/fast-game-over.wav");
-    playerDeathSound.volume = 0.07;
-    playerDeathSound.currentTime = 0;
+    playerDeathSound.volume = 0.15;
     playerDeathSound.play();
+  }
+  if (enemyController.enemyRows.length === 0) {
+    didWin = true;
+    isGameOver = true;
+    let playerWinSound = new Audio("/src/audio/small-win.wav");
+    playerWinSound.volume = 0.25;
+    playerWinSound.play();
   }
 }
 
